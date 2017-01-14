@@ -39,6 +39,7 @@ bool FBXManager::ImportFbx(char* strFileName)
 
 	return true;
 }
+//返回总点数
 int GetVertexs(Vertex4f** point4f)
 {
 	Vertex4f* point = (Vertex4f*)m_lControlPoints;
