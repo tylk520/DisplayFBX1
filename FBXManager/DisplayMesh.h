@@ -8,16 +8,15 @@
    this software in either electronic or hard copy form.
 
 ****************************************************************************************/
-
 #ifndef _DISPLAY_MESH_H
 #define _DISPLAY_MESH_H
-
 #include "DisplayCommon.h"
 
 void DisplayMesh(FbxNode* pNode);
 
-FbxVector4* m_lControlPoints = NULL;
-int m_nControlPointCount = 0;
+int GetControlPointCount();
+FbxVector4* GetControlPoints();
+
 #endif // #ifndef _DISPLAY_MESH_H
 
 

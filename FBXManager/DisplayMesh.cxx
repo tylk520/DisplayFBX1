@@ -8,7 +8,7 @@
    this software in either electronic or hard copy form.
 
 ****************************************************************************************/
-
+#include "stdafx.h"
 #include "DisplayMesh.h"
 
 #include "DisplayMaterial.h"
@@ -16,10 +16,7 @@
 //#include "DisplayLink.h"
 //#include "DisplayShape.h"
 //#include "DisplayCache.h"
-#ifdef DEBUG
-#undef FBXSDK_printf
-#define FBXSDK_printf char*
-#endif // DEBUG
+
 
 
 #if defined (FBXSDK_ENV_MAC)
@@ -38,6 +35,18 @@ void DisplayTextureNames( FbxProperty &pProperty, FbxString& pConnectionString )
 void DisplayMaterialConnections(FbxMesh* pMesh);
 void DisplayMaterialTextureConnections( FbxSurfaceMaterial* pMaterial, 
                                        char * header, int pMatId, int l );
+FbxVector4* m_lControlPoints = NULL;
+int m_nControlPointCount = 0;
+
+FbxVector4* GetControlPoints()
+{
+	return m_lControlPoints;
+}
+int GetControlPointCount()
+{
+	return m_nControlPointCount;
+}
+
 
 void DisplayMesh(FbxNode* pNode)
 {
@@ -57,14 +66,16 @@ void DisplayMesh(FbxNode* pNode)
 	//DisplayCache(lMesh);
 }
 
-
 void DisplayControlsPoints(FbxMesh* pMesh)
 {
     int i, lControlPointsCount = pMesh->GetControlPointsCount();
     FbxVector4* lControlPoints = pMesh->GetControlPoints();
     DisplayString("    Control Points");
 
-    for (i = 0; i < lControlPointsCount; i++)
+	m_nControlPointCount = lControlPointsCount;
+	m_lControlPoints = lControlPoints;
+
+/*    for (i = 0; i < lControlPointsCount; i++)
     {
         DisplayInt("        Control Point ", i);
         Display3DVector("            Coordinates: ", lControlPoints[i]);
@@ -83,22 +94,21 @@ void DisplayControlsPoints(FbxMesh* pMesh)
     }
 
     DisplayString("");
-
-	m_lControlPoints = lControlPoints;
-
+*/
 }
 
 
 void DisplayPolygons(FbxMesh* pMesh)
 {
-    int i, j, lPolygonCount = pMesh->GetPolygonCount();
+	pMesh->GetPolygonVertices();
+/* int i, j, lPolygonCount = pMesh->GetPolygonCount();
     FbxVector4* lControlPoints = pMesh->GetControlPoints(); 
     char header[100];
 
     DisplayString("    Polygons");
 
     int vertexId = 0;
-    for (i = 0; i < lPolygonCount; i++)
+   for (i = 0; i < lPolygonCount; i++)
     {
         DisplayInt("        Polygon ", i);
         int l;
@@ -130,7 +140,7 @@ void DisplayPolygons(FbxMesh* pMesh)
 			int lControlPointIndex = pMesh->GetPolygonVertex(i, j);
 
 			Display3DVector("            Coordinates: ", lControlPoints[lControlPointIndex]);
-
+			
 			for (l = 0; l < pMesh->GetElementVertexColorCount(); l++)
 			{
 				FbxGeometryElementVertexColor* leVtxc = pMesh->GetElementVertexColor( l);
@@ -331,6 +341,7 @@ void DisplayPolygons(FbxMesh* pMesh)
 		}
 	}
     DisplayString("");
+	*/
 }
 
 void DisplayTextureNames( FbxProperty &pProperty, FbxString& pConnectionString )

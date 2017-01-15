@@ -19,7 +19,7 @@ END_MESSAGE_MAP()
 
 
 // CDisplayFBXApp 构造
-
+#include "conio.h"
 CDisplayFBXApp::CDisplayFBXApp()
 {
 	// 支持重新启动管理器
@@ -27,6 +27,9 @@ CDisplayFBXApp::CDisplayFBXApp()
 
 	// TODO: 在此处添加构造代码，
 	// 将所有重要的初始化放置在 InitInstance 中
+
+	AllocConsole();
+	_cprintf("init\r\n");
 }
 
 

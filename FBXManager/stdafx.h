@@ -11,6 +11,9 @@
 // Windows 头文件: 
 #include <windows.h>
 
-
-
+#ifdef _DEBUG
+#include "conio.h"
+#undef FBXSDK_printf
+#define FBXSDK_printf _cprintf
+#endif // DEBUG
 // TODO:  在此处引用程序需要的其他头文件

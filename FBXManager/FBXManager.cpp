@@ -34,18 +34,17 @@ bool FBXManager::ImportFbx(char* strFileName)
 {
 	Import(strFileName);
 	
-	if (m_lControlPoints == NULL)
+	if (GetControlPoints() == NULL)
 		return false;
 
 	return true;
 }
-//返回总点数
-int GetVertexs(Vertex4f** point4f)
+int FBXManager::GetVertexs(Vertex4f ** point4f)
 {
-	Vertex4f* point = (Vertex4f*)m_lControlPoints;
+	Vertex4f* point = (Vertex4f*)GetControlPoints();
 	*point4f = point;
 
-	return m_nControlPointCount;
+	return GetControlPointCount();
 }
 
 int Import(char* name)

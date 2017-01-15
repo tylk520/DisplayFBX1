@@ -1,4 +1,9 @@
 #pragma once
+#ifdef FBXMANAGER_EXPORTS
+	#define dlllib __declspec(dllexport)
+#else
+	#define dlllib __declspec(dllimport)
+#endif // FBXMANAGER_EXPORTS
 
 struct Vertex4f
 {
@@ -7,7 +12,7 @@ struct Vertex4f
 	float z;
 	float w;
 };
-class FBXManager
+class dlllib FBXManager
 {
 public:
 	FBXManager();
